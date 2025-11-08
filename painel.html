@@ -170,7 +170,7 @@
 </head>
 <body>
   <header class="header">
-    <img src="ico/logo.jpg" alt="Logo SID Cursos" class="logo">
+    <img src="./logo.jpg" alt="Logo SID Cursos" class="logo">
     <p class="subtitulo">Curso liberado · Acesso vitalício</p>
   </header>
 
@@ -214,102 +214,150 @@
     </div>
   </div>
 
-  <script>
-    const API_URL = "http://localhost:3000"; // sua API local
+<script>
+  const API_URL = "http://localhost:8080/api"; // rota base da API Spring Boot
+  const JSON_PATH = `${API_URL}/cursos?v=${Date.now()}`; // busca o JSON pelo backend
 
-    const form = document.getElementById("formCurso");
-    const tabela = document.getElementById("tabelaCursos").querySelector("tbody");
-    const preview = document.getElementById("preview");
+  const form = document.getElementById("formCurso");
+  const tabela = document.getElementById("tabelaCursos").querySelector("tbody");
+  const preview = document.getElementById("preview");
+  let cursos = [];
 
-    async function carregarCursos() {
-      const res = await fetch(API_URL + "/cursos");
+  // 🔹 Atualiza a pasta local com a versão mais recente do repositório
+  async function sincronizarRepositorio() {
+    try {
+      const res = await fetch(`${API_URL}/pull`);
+      if (!res.ok) throw new Error("Erro ao sincronizar com o repositório");
       const data = await res.json();
-      renderizarTabela(data);
+      console.log("📥 Repositório atualizado:", data.message);
+    } catch (err) {
+      console.error("❌ Erro ao sincronizar repositório:", err);
+      alert("Falha ao atualizar dados do repositório remoto.");
     }
+  }
 
-    function renderizarTabela(cursos) {
-      tabela.innerHTML = "";
-      cursos.forEach(curso => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td><img src="${curso.imagem}" class="thumb"></td>
-          <td>${curso.nome}</td>
-          <td>${curso.categoria}</td>
-          <td class="actions">
-            <button class="btn-secondary" onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button>
-            <button class="btn-danger" onclick="removerCurso('${curso.id}')">Excluir</button>
-          </td>
-        `;
-        tabela.appendChild(tr);
-      });
+  // 🔹 Carrega os cursos direto do backend (que lê o cursos.json)
+  async function carregarCursos() {
+    try {
+      const res = await fetch(JSON_PATH);
+      if (!res.ok) throw new Error("Erro ao carregar cursos.json");
+      const data = await res.json();
+      cursos = Array.isArray(data) ? data : data.produtos || [];
+      renderizarTabela(cursos);
+    } catch (err) {
+      console.error("❌ Falha ao carregar cursos:", err);
+      tabela.innerHTML = `
+        <tr><td colspan="4" style="color:#aaa;text-align:center;">
+          Erro ao carregar cursos 😢<br><small>${err.message}</small>
+        </td></tr>`;
     }
+  }
 
-    function editarCurso(curso) {
-      document.getElementById("cursoId").value = curso.id;
-      document.getElementById("nome").value = curso.nome;
-      document.getElementById("descricao").value = curso.descricao;
-      document.getElementById("categoria").value = curso.categoria;
-      document.getElementById("link").value = curso.link;
-      preview.src = curso.imagem;
+  // 🔹 Renderiza os cursos na tabela
+  function renderizarTabela(lista) {
+    tabela.innerHTML = "";
+    lista.forEach(curso => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><img src="${curso.imagem}" class="thumb"></td>
+        <td>${curso.nome}</td>
+        <td>${curso.categoria}</td>
+        <td class="actions">
+          <button class="btn-secondary" onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button>
+          <button class="btn-danger" onclick="removerCurso('${curso.id}')">Excluir</button>
+        </td>
+      `;
+      tabela.appendChild(tr);
+    });
+  }
+
+  // 🔹 Preenche o formulário para edição
+  function editarCurso(curso) {
+    document.getElementById("cursoId").value = curso.id;
+    document.getElementById("nome").value = curso.nome;
+    document.getElementById("descricao").value = curso.descricao;
+    document.getElementById("categoria").value = curso.categoria;
+    document.getElementById("link").value = curso.link;
+    preview.src = curso.imagem;
+    preview.style.display = "block";
+    document.getElementById("btnSalvar").textContent = "Atualizar Curso";
+  }
+
+  // 🔹 Remove um curso da lista (em memória)
+  function removerCurso(id) {
+    if (!confirm("Tem certeza que deseja remover este curso?")) return;
+    cursos = cursos.filter(c => c.id !== id);
+    renderizarTabela(cursos);
+  }
+
+  // 🔹 Preview da imagem selecionada
+  document.getElementById("imagem").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      preview.src = event.target.result;
       preview.style.display = "block";
-      document.getElementById("btnSalvar").textContent = "Atualizar Curso";
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // 🔹 Salva ou atualiza um curso (em memória)
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById("cursoId").value || crypto.randomUUID();
+    const nome = document.getElementById("nome").value.trim();
+    const descricao = document.getElementById("descricao").value.trim();
+    const categoria = document.getElementById("categoria").value.trim();
+    const link = document.getElementById("link").value.trim();
+    const imagemInput = document.getElementById("imagem");
+    let imagem = preview.src || "";
+
+    if (imagemInput.files.length > 0) {
+      const fileName = imagemInput.files[0].name;
+      imagem = `img/${fileName}`;
     }
 
-    async function removerCurso(id) {
-      if (!confirm("Tem certeza que deseja remover este curso?")) return;
-      await fetch(API_URL + "/cursos/" + id, { method: "DELETE" });
-      carregarCursos();
-    }
+    const novoCurso = { id, nome, descricao, categoria, link, imagem };
+    const index = cursos.findIndex(c => c.id === id);
+    if (index >= 0) cursos[index] = novoCurso;
+    else cursos.push(novoCurso);
 
-    // Preview da imagem selecionada
-    document.getElementById("imagem").addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        preview.src = event.target.result;
-        preview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    });
+    form.reset();
+    preview.style.display = "none";
+    document.getElementById("btnSalvar").textContent = "Salvar Curso";
+    renderizarTabela(cursos);
+  });
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  // 🔹 Envia alterações para o backend (salvar JSON + commit)
+  document.getElementById("btnCommit").addEventListener("click", async () => {
+    if (!confirm("Deseja realmente salvar e enviar as alterações para o repositório?")) return;
 
-      const id = document.getElementById("cursoId").value;
-      const nome = document.getElementById("nome").value;
-      const descricao = document.getElementById("descricao").value;
-      const categoria = document.getElementById("categoria").value;
-      const link = document.getElementById("link").value;
-      const imagem = document.getElementById("imagem").files[0];
+    try {
+      const json = JSON.stringify(cursos, null, 2);
+      const res = await fetch(`${API_URL}/salvar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: json
+      });
 
-      const formData = new FormData();
-      formData.append("nome", nome);
-      formData.append("descricao", descricao);
-      formData.append("categoria", categoria);
-      formData.append("link", link);
-      if (imagem) formData.append("imagem", imagem);
-
-      if (id) {
-        await fetch(API_URL + "/cursos/" + id, { method: "PUT", body: formData });
-      } else {
-        await fetch(API_URL + "/cursos", { method: "POST", body: formData });
-      }
-
-      form.reset();
-      preview.style.display = "none";
-      document.getElementById("btnSalvar").textContent = "Salvar Curso";
-      carregarCursos();
-    });
-
-    document.getElementById("btnCommit").addEventListener("click", async () => {
-      if (!confirm("Deseja realmente finalizar e enviar as alterações para o repositório?")) return;
-      const res = await fetch(API_URL + "/commit", { method: "POST" });
+      if (!res.ok) throw new Error("Erro ao enviar dados para o servidor");
       const data = await res.json();
-      alert(data.message || "Alterações enviadas com sucesso!");
-    });
+      alert(data.message || "✅ Alterações salvas e enviadas com sucesso!");
+    } catch (err) {
+      alert("❌ Erro ao salvar alterações: " + err.message);
+    }
+  });
 
-    carregarCursos();
-  </script>
+  // 🔹 Inicializa o painel
+  (async () => {
+    await sincronizarRepositorio();
+    await carregarCursos();
+  })();
+</script>
+
+ 
+
 </body>
 </html>
