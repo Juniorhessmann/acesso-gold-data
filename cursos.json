@@ -1,11 +1,11 @@
 [
   {
     "id": "1",
-    "nome": "Curso de Calistenia avançado 2",
-    "descricao": "Aprenda os fundamentos da calistenia com progressões simples e rotinas de treino que desenvolvem força e controle corporal.",
-    "categoria": "Treinamento Físico",
+    "nome": "novo curso",
+    "descricao": "teste",
+    "categoria": "Tecnologia",
     "link": "https://t.me/AcessoManualDoNomade",
-    "imagem": "img/calistenia.jpg"
+    "imagem": "file:///C:/Users/User/Desktop/SID_cursos/ACESSODATA/img/calistenia.jpg"
   },
   {
     "id": "2",
