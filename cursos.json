@@ -1,13 +1,5 @@
 [
   {
-    "id": "1",
-    "nome": "novo curso",
-    "descricao": "teste",
-    "categoria": "Tecnologia",
-    "link": "https://t.me/AcessoManualDoNomade",
-    "imagem": "file:///C:/Users/User/Desktop/SID_cursos/ACESSODATA/img/calistenia.jpg"
-  },
-  {
     "id": "2",
     "nome": "Curso de Manutenção de Celulares e tablets",
     "descricao": "Domine as técnicas de diagnóstico e troca de telas, aprenda a abrir aparelhos com segurança e se torne um técnico profissional.",
@@ -24,75 +16,11 @@
     "imagem": "img/code.jpg"
   },
   {
-    "id": "a0f6ea6f-0877-4362-81c1-38a92306ef5f",
-    "nome": "teste",
-    "descricao": "te",
-    "categoria": "tete",
-    "link": "tetete",
-    "imagem": "img/code.jpg"
-  },
-  {
-    "id": "c3d4411e-900b-483c-bcdd-7da594ee0e93",
-    "nome": "teste2",
-    "descricao": "teste2",
-    "categoria": "teteq",
-    "link": "qrwqr",
-    "imagem": "img/code.jpg"
-  },
-  {
-    "id": "9b8c38bf-b1aa-4997-9cad-d68e2e849d06",
-    "nome": "teste 25",
-    "descricao": "teste",
-    "categoria": "tete",
-    "link": "treter",
+    "id": "6467ff01-6aff-4576-b8c7-b5772a37f6aa",
+    "nome": "calistenia avancada",
+    "descricao": "como ficar bom na calistenia",
+    "categoria": "treinamento fisico",
+    "link": "https://t.me/AcessoManualDoNomade",
     "imagem": "img/calistenia.jpg"
-  },
-  {
-    "id": "0bceeddc-84a0-446a-a6d0-b42b3b208654",
-    "nome": "novo cursow",
-    "descricao": "novo curso",
-    "categoria": "novo",
-    "link": "link",
-    "imagem": "file:///C:/Users/User/Desktop/SID_cursos/ACESSODATA/img/celular.jpg"
-  },
-  {
-    "id": "3694b81e-41e3-4cf6-bb0e-30f9c9a537f8",
-    "nome": "novo curso 33",
-    "descricao": "reweq",
-    "categoria": "tftydtd",
-    "link": "rdrtdty",
-    "imagem": "img/calistenia.jpg"
-  },
-  {
-    "id": "9df1ea4f-34cb-41f2-8cd2-b5a9b7c3820c",
-    "nome": "curso de culinaria",
-    "descricao": "teste",
-    "categoria": "tewwe",
-    "link": "eqtre",
-    "imagem": "img/celular.jpg"
-  },
-  {
-    "id": "8c176b37-6607-4f79-ba21-048477c9beda",
-    "nome": "nonononon",
-    "descricao": "sissisis",
-    "categoria": "dtdrd",
-    "link": "huyk",
-    "imagem": "img/calistenia.jpg"
-  },
-  {
-    "id": "037aefdd-71c5-40d7-8e88-b7caf06a0d79",
-    "nome": "agora vai",
-    "descricao": "vai vai",
-    "categoria": "vqi",
-    "link": "foi?",
-    "imagem": "img/celular.jpg"
-  },
-  {
-    "id": "c5cb26bb-1516-43a7-ae32-f7e75bbe5ca7",
-    "nome": "agora tem que ir",
-    "descricao": "foi?",
-    "categoria": "claro",
-    "link": "concerteza",
-    "imagem": "img/celular.jpg"
   }
 ]
