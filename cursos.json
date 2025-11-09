@@ -46,5 +46,13 @@
     "categoria": "tete",
     "link": "treter",
     "imagem": "img/calistenia.jpg"
+  },
+  {
+    "id": "0bceeddc-84a0-446a-a6d0-b42b3b208654",
+    "nome": "novo curso",
+    "descricao": "novo curso",
+    "categoria": "novo",
+    "link": "link",
+    "imagem": "img/celular.jpg"
   }
 ]
