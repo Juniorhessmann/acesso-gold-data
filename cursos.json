@@ -49,10 +49,10 @@
   },
   {
     "id": "0bceeddc-84a0-446a-a6d0-b42b3b208654",
-    "nome": "novo curso",
+    "nome": "novo cursow",
     "descricao": "novo curso",
     "categoria": "novo",
     "link": "link",
-    "imagem": "img/celular.jpg"
+    "imagem": "file:///C:/Users/User/Desktop/SID_cursos/ACESSODATA/img/celular.jpg"
   }
 ]
