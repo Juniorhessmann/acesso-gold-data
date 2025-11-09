@@ -9,11 +9,11 @@
   },
   {
     "id": "2",
-    "nome": "Curso de Manutenção de Celulares",
+    "nome": "Curso de Manutenção de Celulares e tablets",
     "descricao": "Domine as técnicas de diagnóstico e troca de telas, aprenda a abrir aparelhos com segurança e se torne um técnico profissional.",
     "categoria": "Assistência Técnica",
-    "imagem": "img/celular.jpg",
-    "link": "https://t.me/AcessoManualDoNomade"
+    "link": "https://t.me/AcessoManualDoNomade",
+    "imagem": "img/celular.jpg"
   },
   {
     "id": "3",
