@@ -54,5 +54,45 @@
     "categoria": "novo",
     "link": "link",
     "imagem": "file:///C:/Users/User/Desktop/SID_cursos/ACESSODATA/img/celular.jpg"
+  },
+  {
+    "id": "3694b81e-41e3-4cf6-bb0e-30f9c9a537f8",
+    "nome": "novo curso 33",
+    "descricao": "reweq",
+    "categoria": "tftydtd",
+    "link": "rdrtdty",
+    "imagem": "img/calistenia.jpg"
+  },
+  {
+    "id": "9df1ea4f-34cb-41f2-8cd2-b5a9b7c3820c",
+    "nome": "curso de culinaria",
+    "descricao": "teste",
+    "categoria": "tewwe",
+    "link": "eqtre",
+    "imagem": "img/celular.jpg"
+  },
+  {
+    "id": "8c176b37-6607-4f79-ba21-048477c9beda",
+    "nome": "nonononon",
+    "descricao": "sissisis",
+    "categoria": "dtdrd",
+    "link": "huyk",
+    "imagem": "img/calistenia.jpg"
+  },
+  {
+    "id": "037aefdd-71c5-40d7-8e88-b7caf06a0d79",
+    "nome": "agora vai",
+    "descricao": "vai vai",
+    "categoria": "vqi",
+    "link": "foi?",
+    "imagem": "img/celular.jpg"
+  },
+  {
+    "id": "c5cb26bb-1516-43a7-ae32-f7e75bbe5ca7",
+    "nome": "agora tem que ir",
+    "descricao": "foi?",
+    "categoria": "claro",
+    "link": "concerteza",
+    "imagem": "img/celular.jpg"
   }
 ]
